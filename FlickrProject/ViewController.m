@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UITextField *passwordTextField;
 @property (strong, nonatomic) NSDictionary *viewsDictionary;
 @property (strong, nonatomic) NSDictionary *metrics;
+@property (strong, nonatomic) UIButton *loginButton;
 @end
 
 @implementation ViewController
@@ -81,8 +82,7 @@
 - (void)prepareLoginForm
 {
     [self positionLogoOnTop];
-    [self textFieldsAppear];
-    [self loginButtonAppear];
+    [self loginElementsAppear];
     
     [UIView animateWithDuration:0.3
                      animations:^{
@@ -94,10 +94,6 @@
     
 }
 
-- (void)loginButtonAppear
-{
-    
-}
 
 - (void)positionLogoOnTop
 {
@@ -118,7 +114,7 @@
     [self.view addConstraints:position_V];
 }
 
-- (void)textFieldsAppear
+- (void)loginElementsAppear
 {
     [UIView animateWithDuration:0.6
                           delay:0
@@ -126,6 +122,7 @@
                      animations:^{
                          self.usernameTextField.alpha = 0.8;
                          self.passwordTextField.alpha = 0.8;
+                         self.loginButton.alpha = 1;
                      } completion:^(BOOL finished) {}];
 }
 
@@ -134,6 +131,7 @@
     if (!_viewsDictionary) {
         _viewsDictionary = @{@"username":self.usernameTextField,
                              @"password":self.passwordTextField,
+                             @"login":self.loginButton,
                              @"logo":self.logoImageView};
     }
     return _viewsDictionary;
@@ -185,6 +183,7 @@
         _usernameTextField.returnKeyType = UIReturnKeyNext;
         _usernameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _usernameTextField.delegate = self;
+        [_usernameTextField addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
         _usernameTextField.alpha = 0;
         [self.view addSubview:_usernameTextField];
         [self addConstraintsToUsername];
@@ -205,11 +204,35 @@
         _passwordTextField.returnKeyType = UIReturnKeyGo;
         _passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _passwordTextField.delegate = self;
+        [_passwordTextField addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
         _passwordTextField.alpha = 0;
         [self.view addSubview:_passwordTextField];
         [self addConstraintsToPassword];
     }
     return _passwordTextField;
+}
+
+- (UIButton *)loginButton
+{
+    if (!_loginButton) {
+        _loginButton = [UIButton new];
+        _loginButton.backgroundColor = [UIColor magentaColor];
+        _loginButton.enabled = NO;
+        _loginButton.layer.cornerRadius = 5;
+        _loginButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_loginButton setTitle:@"Login" forState:UIControlStateNormal];
+        _loginButton.alpha = 0;
+        [_loginButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_loginButton];
+        [self addConstraintsToLoginButton];
+    }
+    return _loginButton;
+}
+
+- (void)textFieldChanged:(UITextField *)textField
+{
+    self.loginButton.enabled = (self.usernameTextField.text.length > 0 && self.passwordTextField.text.length > 0);
+    NSLog(@"%s", (self.loginButton.enabled) ? "true" : "false");
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -218,11 +241,7 @@
         [self.passwordTextField becomeFirstResponder];
         return NO;
     } else if (textField == self.passwordTextField) {
-        if ([self.usernameTextField.text isEqualToString:@""] || [self.passwordTextField.text isEqualToString:@""]) {
-            return NO;
-        }
-        [self login];
-        [self.passwordTextField resignFirstResponder];
+        if (self.loginButton.enabled) [self login];
         return NO;
     }
     return YES;
@@ -230,7 +249,9 @@
 
 - (void)login
 {
-    NSLog(@"LOGIN");
+    if (self.usernameTextField.isFirstResponder) [self.usernameTextField resignFirstResponder];
+    else [self.passwordTextField resignFirstResponder];
+    NSLog(@"Login!");
 }
 
 - (void)addConstraintsToUsername
@@ -288,6 +309,30 @@
                                                                                views:self.viewsDictionary];
     
     [self.view addConstraints:constraint_V_password];
+}
+
+- (void)addConstraintsToLoginButton
+{
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loginButton
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.passwordTextField
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:1
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loginButton
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.passwordTextField
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:1
+                                                           constant:0]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[password]-16-[login]"
+                                                                      options:NSLayoutFormatAlignAllCenterX
+                                                                      metrics:nil
+                                                                        views:self.viewsDictionary]];
 }
 
 @end
