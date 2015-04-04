@@ -81,15 +81,21 @@
 - (void)prepareLoginForm
 {
     [self positionLogoOnTop];
-    [UIView animateWithDuration:0.5
+    [self textFieldsAppear];
+    [self loginButtonAppear];
+    
+    [UIView animateWithDuration:0.3
                      animations:^{
-                         
                          [self.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
-//                         [self positionTextFields];
-//                         [self textFieldsAppear];
+                         [self.usernameTextField becomeFirstResponder];
                      }];
+    
+}
+
+- (void)loginButtonAppear
+{
     
 }
 
@@ -104,7 +110,7 @@
         }
     }];
     
-    NSArray *position_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[logo]"
+    NSArray *position_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[logo]"
                                                                   options:NSLayoutFormatAlignAllCenterX
                                                                   metrics:nil
                                                                     views:self.viewsDictionary];
@@ -112,104 +118,23 @@
     [self.view addConstraints:position_V];
 }
 
-- (void)positionTextFields
-{
-    [self setNewConstraints];
-    
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         [self.view setNeedsUpdateConstraints];
-                     }];
-}
-
 - (void)textFieldsAppear
 {
-    self.usernameTextField.alpha = 0;
-    self.passwordTextField.alpha = 0;
-    
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration:0.6
+                          delay:0
+                        options:UIViewAnimationOptionTransitionNone
                      animations:^{
                          self.usernameTextField.alpha = 0.8;
                          self.passwordTextField.alpha = 0.8;
-                     } completion:^(BOOL finished) {
-                         [self.usernameTextField becomeFirstResponder];
-                     }];
-}
-
-- (void)setNewConstraints
-{
-    self.usernameTextField = [UITextField new];
-    self.usernameTextField.backgroundColor = [UIColor whiteColor];
-    self.usernameTextField.placeholder = @"Username";
-    self.usernameTextField.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:self.usernameTextField];
-    
-    self.passwordTextField = [UITextField new];
-    self.passwordTextField.backgroundColor = [UIColor whiteColor];
-    self.passwordTextField.placeholder = @"Password";
-
-    self.passwordTextField.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:self.passwordTextField];
-    
-
-    
-    NSArray *size_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[username(40)]"
-                                                              options:0
-                                                              metrics:nil
-                                                                views:self.viewsDictionary];
-
-    
-    
-    [self.usernameTextField addConstraints:size_V];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.passwordTextField
-                                                                       attribute:NSLayoutAttributeHeight
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:self.usernameTextField
-                                                                       attribute:NSLayoutAttributeHeight
-                                                                      multiplier:1
-                                                                        constant:0]];
-   
-    NSArray *constraint_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[username]-|"
-                                                                    options:0
-                                                                    metrics:nil
-                                                                      views:self.viewsDictionary];
-    
-    NSArray *constraint_V_username = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[logo]-20-[username]"
-                                                              options:0
-                                                              metrics:nil
-                                                                views:self.viewsDictionary];
-    
-    
-    [self.view addConstraints:constraint_H];
-    [self.view addConstraints:constraint_V_username];
-    
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.passwordTextField
-                                                          attribute:NSLayoutAttributeWidth
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.usernameTextField
-                                                          attribute:NSLayoutAttributeWidth
-                                                         multiplier:1
-                                                           constant:0]];
-    
-    NSArray *constraint_V_password = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[username]-4-[password]"
-                                                                             options:NSLayoutFormatAlignAllCenterX
-                                                                             metrics:nil
-                                                                               views:self.viewsDictionary];
-    
-    [self.view addConstraints:constraint_V_password];
-
+                     } completion:^(BOOL finished) {}];
 }
 
 - (NSDictionary *)viewsDictionary
 {
     if (!_viewsDictionary) {
-//        _viewsDictionary = @{@"username":self.usernameTextField,
-//                             @"password":self.passwordTextField,
-//                             @"logo":self.logoImageView};
-        _viewsDictionary = @{@"logo":self.logoImageView};
-
+        _viewsDictionary = @{@"username":self.usernameTextField,
+                             @"password":self.passwordTextField,
+                             @"logo":self.logoImageView};
     }
     return _viewsDictionary;
 }
@@ -245,6 +170,124 @@
                      @"height":[NSNumber numberWithFloat:height]};
     }
     return _metrics;
+}
+
+- (UITextField *)usernameTextField
+{
+    if (!_usernameTextField) {
+        _usernameTextField = [UITextField new];
+        _usernameTextField.backgroundColor = [UIColor whiteColor];
+        _usernameTextField.placeholder = @"Username";
+        _usernameTextField.spellCheckingType = UITextSpellCheckingTypeNo;
+        _usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        _usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _usernameTextField.translatesAutoresizingMaskIntoConstraints = NO;
+        _usernameTextField.returnKeyType = UIReturnKeyNext;
+        _usernameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _usernameTextField.delegate = self;
+        _usernameTextField.alpha = 0;
+        [self.view addSubview:_usernameTextField];
+        [self addConstraintsToUsername];
+    }
+    return _usernameTextField;
+}
+
+- (UITextField *)passwordTextField{
+    if (!_passwordTextField) {
+        _passwordTextField = [UITextField new];
+        _passwordTextField.backgroundColor = [UIColor whiteColor];
+        _passwordTextField.placeholder = @"Password";
+        _passwordTextField.spellCheckingType = UITextSpellCheckingTypeNo;
+        _passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        _passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _passwordTextField.secureTextEntry = YES;
+        _passwordTextField.translatesAutoresizingMaskIntoConstraints = NO;
+        _passwordTextField.returnKeyType = UIReturnKeyGo;
+        _passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _passwordTextField.delegate = self;
+        _passwordTextField.alpha = 0;
+        [self.view addSubview:_passwordTextField];
+        [self addConstraintsToPassword];
+    }
+    return _passwordTextField;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.usernameTextField) {
+        [self.passwordTextField becomeFirstResponder];
+        return NO;
+    } else if (textField == self.passwordTextField) {
+        if ([self.usernameTextField.text isEqualToString:@""] || [self.passwordTextField.text isEqualToString:@""]) {
+            return NO;
+        }
+        [self login];
+        [self.passwordTextField resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)login
+{
+    NSLog(@"LOGIN");
+}
+
+- (void)addConstraintsToUsername
+{
+    NSArray *size_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[username(40)]"
+                                                              options:0
+                                                              metrics:nil
+                                                                views:self.viewsDictionary];
+    
+    
+    
+    [self.usernameTextField addConstraints:size_V];
+    
+    NSArray *constraint_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[username]-|"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:self.viewsDictionary];
+    [self.view addConstraints:constraint_H];
+    
+    NSArray *constraint_V_username = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[logo]-30-[username]"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:self.viewsDictionary];
+    
+    
+    [self.view addConstraints:constraint_V_username];
+}
+
+- (void)addConstraintsToPassword
+{
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.passwordTextField
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.usernameTextField
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:1
+                                                           constant:0]];
+    
+    
+    
+    
+    
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.passwordTextField
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.usernameTextField
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:1
+                                                           constant:0]];
+    
+    NSArray *constraint_V_password = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[username]-4-[password]"
+                                                                             options:NSLayoutFormatAlignAllCenterX
+                                                                             metrics:nil
+                                                                               views:self.viewsDictionary];
+    
+    [self.view addConstraints:constraint_V_password];
 }
 
 @end
