@@ -8,15 +8,19 @@
 
 #import "ViewController.h"
 #import "FLCBackgroundView.h"
+#import "FLCLoginFormView.h"
 
 @interface ViewController ()
 @property (nonatomic, strong)FLCBackgroundView *backgroundView;
+@property (nonatomic, strong)FLCLoginFormView *loginFormView;
 @property (strong, nonatomic) UIImageView *logoImageView;
 @property (strong, nonatomic) UITextField *usernameTextField;
 @property (strong, nonatomic) UITextField *passwordTextField;
 @property (strong, nonatomic) NSDictionary *viewsDictionary;
 @property (strong, nonatomic) NSDictionary *metrics;
 @property (strong, nonatomic) UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UIButton *exploreViewButton;
+@property (strong, nonatomic) IBOutlet UIButton *loginFormButton;
 @end
 
 @implementation ViewController
@@ -26,9 +30,6 @@
     [self loadBackground];
     [self positionLogoInCenter];
 }
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{}
 
 - (void)loadBackground
 {
@@ -89,9 +90,7 @@
                          [self.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
-                         [self.usernameTextField becomeFirstResponder];
                      }];
-    
 }
 
 
@@ -122,8 +121,12 @@
                      animations:^{
                          self.usernameTextField.alpha = 0.8;
                          self.passwordTextField.alpha = 0.8;
-                         self.loginButton.alpha = 1;
-                     } completion:^(BOOL finished) {}];
+                         self.loginButton.alpha = 0.5;
+                        [self.usernameTextField becomeFirstResponder];
+                     } completion:^(BOOL finished) {
+                         self.exploreViewButton.alpha = 0;
+                         self.loginFormButton.alpha = 0;
+                     }];
 }
 
 - (NSDictionary *)viewsDictionary
@@ -216,11 +219,15 @@
 {
     if (!_loginButton) {
         _loginButton = [UIButton new];
-        _loginButton.backgroundColor = [UIColor magentaColor];
+//        _loginButton.backgroundColor = [UIColor colorWithRed:161/255.0 green:16/255.0 blue:149/255.0 alpha:1];
+//        _loginButton.backgroundColor = [[UIColor alloc] initWithWhite:1 alpha:1];
+        _loginButton.backgroundColor = [UIColor colorWithRed:161/255.0 green:16/255.0 blue:149/255.0 alpha:1];
+//        [_loginButton setTitleColor:[UIColor colorWithRed:161/255.0 green:16/255.0 blue:149/255.0 alpha:1] forState:UIControlStateNormal];
         _loginButton.enabled = NO;
         _loginButton.layer.cornerRadius = 5;
         _loginButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_loginButton setTitle:@"Login" forState:UIControlStateNormal];
+        [_loginButton setTitleColor:[[UIColor alloc] initWithWhite:1 alpha:0.3] forState:UIControlStateHighlighted];
         _loginButton.alpha = 0;
         [_loginButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_loginButton];
@@ -229,10 +236,16 @@
     return _loginButton;
 }
 
+
 - (void)textFieldChanged:(UITextField *)textField
 {
+    [self updateLoginButton];
+}
+
+- (void)updateLoginButton
+{
     self.loginButton.enabled = (self.usernameTextField.text.length > 0 && self.passwordTextField.text.length > 0);
-    NSLog(@"%s", (self.loginButton.enabled) ? "true" : "false");
+    self.loginButton.alpha = (self.loginButton.enabled) ? 1 : 0.5;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -250,8 +263,9 @@
 - (void)login
 {
     if (self.usernameTextField.isFirstResponder) [self.usernameTextField resignFirstResponder];
-    else [self.passwordTextField resignFirstResponder];
-    NSLog(@"Login!");
+    else if (self.passwordTextField.isFirstResponder) [self.passwordTextField resignFirstResponder];
+    NSString *buttonTitle = [self.loginButton.titleLabel.text isEqualToString:@"Login"] ? @"Cancel" : @"Login";
+    [self.loginButton setTitle:buttonTitle forState:UIControlStateNormal];
 }
 
 - (void)addConstraintsToUsername
@@ -333,6 +347,16 @@
                                                                       options:NSLayoutFormatAlignAllCenterX
                                                                       metrics:nil
                                                                         views:self.viewsDictionary]];
+}
+
+- (FLCLoginFormView *)loginFormView
+{
+    if (!_loginFormView) {
+        _loginFormView = [[FLCLoginFormView alloc] init];
+        _loginFormView.bounds = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height/3);
+        _loginFormView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return _loginFormView;
 }
 
 @end

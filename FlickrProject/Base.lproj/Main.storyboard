@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1066" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -50,15 +51,29 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="UYG-8d-uGD" firstAttribute="width" secondItem="qhA-Dg-Nc3" secondAttribute="width" id="CNP-Rt-Qav"/>
+                            <constraint firstItem="UYG-8d-uGD" firstAttribute="width" secondItem="qhA-Dg-Nc3" secondAttribute="height" multiplier="14:3" id="E5g-cw-vZi"/>
                             <constraint firstItem="qhA-Dg-Nc3" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="HN9-eZ-hr1"/>
                             <constraint firstItem="UYG-8d-uGD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Hy8-r1-Vjt"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="qhA-Dg-Nc3" secondAttribute="bottom" constant="8" id="MMl-nN-lP0"/>
                             <constraint firstItem="qhA-Dg-Nc3" firstAttribute="leading" secondItem="UYG-8d-uGD" secondAttribute="trailing" constant="8" id="WZx-eX-txn"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="UYG-8d-uGD" secondAttribute="bottom" constant="8" id="Zua-rw-Phi"/>
+                            <constraint firstItem="UYG-8d-uGD" firstAttribute="width" secondItem="qhA-Dg-Nc3" secondAttribute="width" id="iHn-GZ-vx3"/>
                             <constraint firstItem="UYG-8d-uGD" firstAttribute="height" secondItem="qhA-Dg-Nc3" secondAttribute="height" id="jEW-hv-H2J"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UYG-8d-uGD" secondAttribute="trailing" constant="148" id="rVd-rX-rcF"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CNP-Rt-Qav"/>
+                                <exclude reference="iHn-GZ-vx3"/>
+                                <exclude reference="jEW-hv-H2J"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="exploreViewButton" destination="UYG-8d-uGD" id="v2I-0B-MvC"/>
+                        <outlet property="loginFormButton" destination="qhA-Dg-Nc3" id="Cw3-Jq-kJR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

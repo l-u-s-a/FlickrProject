@@ -16,6 +16,7 @@
 		A19DEF331ACF432B0025E65D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19DEF311ACF432B0025E65D /* LaunchScreen.xib */; };
 		A19DEF3F1ACF432B0025E65D /* FlickrProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF3E1ACF432B0025E65D /* FlickrProjectTests.m */; };
 		A19DEF4A1ACF4B580025E65D /* FLCBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF491ACF4B580025E65D /* FLCBackgroundView.m */; };
+		A19DEF501AD162570025E65D /* FLCLoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		A19DEF3E1ACF432B0025E65D /* FlickrProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlickrProjectTests.m; sourceTree = "<group>"; };
 		A19DEF481ACF4B580025E65D /* FLCBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCBackgroundView.h; sourceTree = "<group>"; };
 		A19DEF491ACF4B580025E65D /* FLCBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCBackgroundView.m; sourceTree = "<group>"; };
+		A19DEF4E1AD162570025E65D /* FLCLoginFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCLoginFormView.h; sourceTree = "<group>"; };
+		A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCLoginFormView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				A19DEF481ACF4B580025E65D /* FLCBackgroundView.h */,
 				A19DEF491ACF4B580025E65D /* FLCBackgroundView.m */,
 				A19DEF2C1ACF432B0025E65D /* Main.storyboard */,
+				A19DEF4E1AD162570025E65D /* FLCLoginFormView.h */,
+				A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */,
 				A19DEF2F1ACF432B0025E65D /* Images.xcassets */,
 				A19DEF311ACF432B0025E65D /* LaunchScreen.xib */,
 				A19DEF261ACF432B0025E65D /* FlickrProject.xcdatamodeld */,
@@ -230,6 +235,7 @@
 				A19DEF281ACF432B0025E65D /* FlickrProject.xcdatamodeld in Sources */,
 				A19DEF251ACF432B0025E65D /* AppDelegate.m in Sources */,
 				A19DEF2B1ACF432B0025E65D /* ViewController.m in Sources */,
+				A19DEF501AD162570025E65D /* FLCLoginFormView.m in Sources */,
 				A19DEF221ACF432B0025E65D /* main.m in Sources */,
 				A19DEF4A1ACF4B580025E65D /* FLCBackgroundView.m in Sources */,
 			);
