@@ -67,13 +67,20 @@
 {
     [self addSizeConstraintsToLogo];
     [self addConstraintsToButtomButtons];
-    [self addBackgroundConstraints];
 }
 
-//- (void)addBackgroundConstraints
-//{
-//    [self.view addConstraints:[NSLayoutConstraint con]]
-//}
+- (void)addBackgroundConstraints
+{
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[background]|"
+                                                                      options:NSLayoutFormatAlignAllCenterY
+                                                                      metrics:nil
+                                                                        views:self.viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[background]|"
+                                                                      options:NSLayoutFormatAlignAllCenterX
+                                                                      metrics:nil
+                                                                        views:self.viewsDictionary]];
+    
+}
 
 
 
@@ -174,7 +181,8 @@
                              @"logo":self.logoImageView,
                              @"explore":self.exploreViewButton,
                              @"signIn":self.signInFormButton,
-                             @"X":self.closeFormButton};
+                             @"X":self.closeFormButton,
+                             @"background":self.backgroundView};
     }
     return _viewsDictionary;
 }
@@ -195,8 +203,8 @@
 {
     if (!_backgroundView) {
         _backgroundView = [FLCBackgroundView new];
-//        _backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
-//        [_backgroundView insertSubview:_backgroundView atIndex:0];
+        _backgroundView.frame = self.view.bounds;
+        [self.view insertSubview:_backgroundView atIndex:0];
     }
     return _backgroundView;
 }

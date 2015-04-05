@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FLCBackgroundView : UIScrollView
+@interface FLCBackgroundView : UIScrollView <UIScrollViewDelegate>
 
 @end
