@@ -17,6 +17,7 @@
 		A19DEF3F1ACF432B0025E65D /* FlickrProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF3E1ACF432B0025E65D /* FlickrProjectTests.m */; };
 		A19DEF4A1ACF4B580025E65D /* FLCBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF491ACF4B580025E65D /* FLCBackgroundView.m */; };
 		A19DEF501AD162570025E65D /* FLCLoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */; };
+		A19DEF531AD187930025E65D /* FLCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF521AD187930025E65D /* FLCButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		A19DEF491ACF4B580025E65D /* FLCBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCBackgroundView.m; sourceTree = "<group>"; };
 		A19DEF4E1AD162570025E65D /* FLCLoginFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCLoginFormView.h; sourceTree = "<group>"; };
 		A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCLoginFormView.m; sourceTree = "<group>"; };
+		A19DEF511AD187930025E65D /* FLCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCButton.h; sourceTree = "<group>"; };
+		A19DEF521AD187930025E65D /* FLCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,8 @@
 				A19DEF491ACF4B580025E65D /* FLCBackgroundView.m */,
 				A19DEF2C1ACF432B0025E65D /* Main.storyboard */,
 				A19DEF4E1AD162570025E65D /* FLCLoginFormView.h */,
+				A19DEF511AD187930025E65D /* FLCButton.h */,
+				A19DEF521AD187930025E65D /* FLCButton.m */,
 				A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */,
 				A19DEF2F1ACF432B0025E65D /* Images.xcassets */,
 				A19DEF311ACF432B0025E65D /* LaunchScreen.xib */,
@@ -232,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A19DEF531AD187930025E65D /* FLCButton.m in Sources */,
 				A19DEF281ACF432B0025E65D /* FlickrProject.xcdatamodeld in Sources */,
 				A19DEF251ACF432B0025E65D /* AppDelegate.m in Sources */,
 				A19DEF2B1ACF432B0025E65D /* ViewController.m in Sources */,

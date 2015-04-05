@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FLCLoginFormView : UIView
-
+@interface FLCLoginFormView : UIView <UITextFieldDelegate>
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *password;
+- (void)setUsernameAsResponder;
+- (void)setWindowAsResponder;
 @end
