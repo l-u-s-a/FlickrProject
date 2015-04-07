@@ -86,18 +86,13 @@ static bool transitionIsForward = YES;
 {
     if (!self.nextPicture) [self loadNextPicture];
     
-    
-    
     [UIView transitionWithView:self
-                      duration:30
+                      duration:20
                        options:UIViewAnimationOptionCurveLinear                    animations:^{
                         self.contentOffset = (transitionIsForward) ? [self endingOffset] : [self beginningOffset];
                     } completion:^(BOOL finished) {
                         if (finished) {
-                            self.currentPicture = self.nextPicture;
-                            self.nextPicture = nil;
-                            transitionIsForward = (transitionIsForward) ? NO : YES;
-                            [self startTransition];
+                            [self changePicture];
                         } else {
                             [self startTransition];
                         }
@@ -106,13 +101,25 @@ static bool transitionIsForward = YES;
 
 - (void)changePicture
 {
-    self.currentPicture = self.nextPicture;
-    self.nextPicture = nil;
-    [self startTransition];
-    [self loadNextPicture];
+    if (!self.nextPicture) {
+        transitionIsForward = (transitionIsForward) ? NO : YES;
+        [self startTransition];
+        return;
+    }
+    
+    [UIView transitionWithView:self.imageView
+                      duration:0.4
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        self.currentPicture = self.nextPicture;
+                        self.nextPicture = nil;
+                    } completion:^(BOOL finished) {
+                        transitionIsForward = (transitionIsForward) ? NO : YES;
+                        [self startTransition];
+                    }];
 }
-    
-    
+
+
 //    [self loadNextPicture];
 //    self.contentOffset = CGPointZero;
 //    [UIView transitionWithView:self.imageView
