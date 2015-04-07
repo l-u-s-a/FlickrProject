@@ -13,8 +13,8 @@
 
 @interface FLCBackgroundView()
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UIImage *currentPicture;
 @property (nonatomic, strong) UIImage *nextPicture;
+@property (nonatomic, strong) UIImage *nextBlurredPicture;
 @end
 
 @implementation FLCBackgroundView
@@ -34,7 +34,8 @@ static bool transitionIsForward = YES;
 - (UIImage *)currentPicture
 {
     if (!_currentPicture) {
-        _currentPicture = [[UIImage imageNamed:@"background"] exposure:-1];
+        _currentPicture = [UIImage imageNamed:@"background"];
+        self.currentBlurredPicture = [UIImage imageNamed:@"backgroundBlurred"];
     }
     return _currentPicture;
 }
@@ -43,6 +44,14 @@ static bool transitionIsForward = YES;
 {
     _currentPicture = currentPicture;
     self.imageView.image = currentPicture;
+    self.currentBlurredPicture = self.nextBlurredPicture;
+    self.nextBlurredPicture = nil;
+}
+
+- (void)setNextPicture:(UIImage *)nextPicture
+{
+    _nextPicture = nextPicture;
+    self.nextBlurredPicture = [nextPicture blur:10];
 }
 
 - (instancetype)init
@@ -75,9 +84,7 @@ static bool transitionIsForward = YES;
         self.zoomScale = self.minimumZoomScale;
         self.frame = frame;
     }
-    
     return self;
-
 }
 
 
@@ -88,15 +95,19 @@ static bool transitionIsForward = YES;
     
     [UIView transitionWithView:self
                       duration:20
-                       options:UIViewAnimationOptionCurveLinear                    animations:^{
+                       options:UIViewAnimationOptionCurveLinear
+                    animations:^{
                         self.contentOffset = (transitionIsForward) ? [self endingOffset] : [self beginningOffset];
                     } completion:^(BOOL finished) {
                         if (finished) {
                             [self changePicture];
-                        } else {
-                            [self startTransition];
                         }
                     }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"%f", scrollView.contentOffset.x);
 }
 
 - (void)changePicture
@@ -188,7 +199,13 @@ static bool transitionIsForward = YES;
         NSDictionary *randomPhotoDictionary = [photoDictionariesArray objectAtIndex:arc4random() % photoDictionariesArray.count];
         self.nextPicture = [[[[FLCImage alloc] initWithDescriptionDictionary:randomPhotoDictionary] largeSizedImage] exposure:-1];
     }];
-    
+}
+
+- (void)blurBackground
+{
+    [self.layer removeAllAnimations];
+    self.currentPicture = self.currentBlurredPicture;
+
 }
 
 @end

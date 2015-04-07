@@ -10,6 +10,7 @@
 #import "FLCBackgroundView.h"
 #import "FLCLoginFormView.h"
 #import "FLCButton.h"
+#import "ImageFilter.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) FLCBackgroundView *backgroundView;
@@ -126,17 +127,19 @@
     [self positionLogoOnTop];
     [self.loginFormView setUsernameAsResponder];
     
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         [self.view layoutIfNeeded];
-                         self.loginFormView.alpha = 1;
-                         self.closeFormButton.alpha = 1;
-                     }
-                     completion:^(BOOL finished) {
-                         self.exploreViewButton.alpha = 0;
-                         self.signInFormButton.alpha = 0;
-                         [self.backgroundView.layer removeAllAnimations];
-                     }];
+    [UIView transitionWithView:self.backgroundView
+                      duration:0.3
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.backgroundView blurBackground];
+                        [self.view layoutIfNeeded];
+                        self.loginFormView.alpha = 1;
+                        self.closeFormButton.alpha = 1;
+                    } completion:^(BOOL finished) {
+                        self.exploreViewButton.alpha = 0;
+                        self.signInFormButton.alpha = 0;
+                        [self.backgroundView.layer removeAllAnimations];
+                    }];
 }
 
 - (void)closeForm
