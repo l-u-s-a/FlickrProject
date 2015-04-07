@@ -7,15 +7,17 @@
 //
 
 #import "AppDelegate.h"
-
-@interface AppDelegate ()
-
-@end
+#import "FlickrKit.h"
 
 @implementation AppDelegate
 
+-(void)authorize
+{
+    [[FlickrKit sharedFlickrKit] initializeWithAPIKey:@"938910b6dcac7eb75320cea1c6471fe4" sharedSecret:@"88cb0beb835a831f"];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self authorize];
     // Override point for customization after application launch.
     return YES;
 }

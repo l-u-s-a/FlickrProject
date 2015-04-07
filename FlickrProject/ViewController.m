@@ -20,25 +20,38 @@
 @property (strong, nonatomic) FLCButton *exploreViewButton;
 @property (strong, nonatomic) FLCButton *signInFormButton;
 @property (strong, nonatomic) UIButton *closeFormButton;
+@property (assign, nonatomic) UIDeviceOrientation currentOrientation;
+@property (assign, nonatomic) BOOL orientationChanged;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currentOrientation = [[UIDevice currentDevice] orientation];
     [self setupConstraints];
     [self positionLogoInCenter];
     [self addConstraintsToLoginForm];
     [self.backgroundView startTransition];
+    self.currentOrientation =[[UIDevice currentDevice] orientation];
 }
 
 - (void)viewDidLayoutSubviews
 {
-    self.backgroundView.frame = self.view.frame;
-    [self.backgroundView updateBackground];
-//    [self.backgroundView.layer removeAllAnimations];
+    if ([self orientationChanged]) {
+        NSLog(@"promjenio");
+//        self.backgroundView.frame = self.view.frame;
+        [self.backgroundView updateBackground];
+    }
 }
 
+- (BOOL)orientationChanged
+{
+    if ([[UIDevice currentDevice] orientation] != self.currentOrientation) {
+        self.currentOrientation = [[UIDevice currentDevice] orientation];
+        return YES;
+    } else return NO;
+}
 
 - (void)positionLogoInCenter
 {
@@ -122,6 +135,7 @@
                      completion:^(BOOL finished) {
                          self.exploreViewButton.alpha = 0;
                          self.signInFormButton.alpha = 0;
+                         [self.backgroundView.layer removeAllAnimations];
                      }];
 }
 
@@ -326,16 +340,13 @@
                                                           attribute:NSLayoutAttributeWidth
                                                          multiplier:1
                                                            constant:0]];
-    
-    
-    
-    
 }
 
 - (FLCBackgroundView *)backgroundView
 {
     if (!_backgroundView) {
         _backgroundView = [[FLCBackgroundView alloc]initWithFrame:self.view.frame];
+//        _backgroundView = [FLCBackgroundView new];
         [self.view insertSubview:_backgroundView atIndex:0];
     }
     return _backgroundView;

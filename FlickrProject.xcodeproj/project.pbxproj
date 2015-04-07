@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30E4455631FF50766930C901 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8FB15A6D319FB1B7F35064 /* libPods.a */; };
+		A1667EC51AD3D1A200C2C155 /* FLCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A1667EC41AD3D1A200C2C155 /* FLCImage.m */; };
 		A19DEF221ACF432B0025E65D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF211ACF432B0025E65D /* main.m */; };
 		A19DEF251ACF432B0025E65D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF241ACF432B0025E65D /* AppDelegate.m */; };
 		A19DEF281ACF432B0025E65D /* FlickrProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF261ACF432B0025E65D /* FlickrProject.xcdatamodeld */; };
@@ -34,6 +35,8 @@
 /* Begin PBXFileReference section */
 		4C22A06544A1D6D9037D100E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7E8FB15A6D319FB1B7F35064 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1667EC31AD3D1A200C2C155 /* FLCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLCImage.h; path = ../FLCImage.h; sourceTree = "<group>"; };
+		A1667EC41AD3D1A200C2C155 /* FLCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLCImage.m; path = ../FLCImage.m; sourceTree = "<group>"; };
 		A19DEF1C1ACF432B0025E65D /* FlickrProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19DEF201ACF432B0025E65D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A19DEF211ACF432B0025E65D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 		A19DEF1E1ACF432B0025E65D /* FlickrProject */ = {
 			isa = PBXGroup;
 			children = (
+				A1667EC31AD3D1A200C2C155 /* FLCImage.h */,
+				A1667EC41AD3D1A200C2C155 /* FLCImage.m */,
 				A19DEF291ACF432B0025E65D /* ViewController.h */,
 				A19DEF2A1ACF432B0025E65D /* ViewController.m */,
 				A19DEF481ACF4B580025E65D /* FLCBackgroundView.h */,
@@ -301,6 +306,7 @@
 				A19DEF251ACF432B0025E65D /* AppDelegate.m in Sources */,
 				A19DEF2B1ACF432B0025E65D /* ViewController.m in Sources */,
 				A19DEF501AD162570025E65D /* FLCLoginFormView.m in Sources */,
+				A1667EC51AD3D1A200C2C155 /* FLCImage.m in Sources */,
 				A19DEF221ACF432B0025E65D /* main.m in Sources */,
 				A19DEF4A1ACF4B580025E65D /* FLCBackgroundView.m in Sources */,
 			);
