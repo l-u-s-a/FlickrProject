@@ -1,0 +1,6 @@
+#include "Pods-ImageFilters.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/ImageFilters" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/FlickrKit" "${PODS_ROOT}/Headers/Public/ImageFilters"
+OTHER_LDFLAGS = ${PODS_IMAGEFILTERS_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES

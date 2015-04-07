@@ -1,0 +1,22 @@
+PODS:
+  - FlickrKit (1.0.4)
+  - ImageFilters (0.3.0)
+
+DEPENDENCIES:
+  - FlickrKit
+  - ImageFilters (from `https://github.com/jameswomack/iOS-Image-Filters.git`)
+
+EXTERNAL SOURCES:
+  ImageFilters:
+    :git: https://github.com/jameswomack/iOS-Image-Filters.git
+
+CHECKOUT OPTIONS:
+  ImageFilters:
+    :commit: c4556d013d99f70bd9e49eb3a17cdc178a28e010
+    :git: https://github.com/jameswomack/iOS-Image-Filters.git
+
+SPEC CHECKSUMS:
+  FlickrKit: 658792f6d54b3a282e0b0996b0d4ede3fcfed6e1
+  ImageFilters: 36363138a10185bad6b849b874cc4bb94a074894
+
+COCOAPODS: 0.36.0
