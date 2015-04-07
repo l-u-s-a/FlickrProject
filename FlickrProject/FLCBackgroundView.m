@@ -72,6 +72,7 @@ static bool transitionIsForward = YES;
     
     if (self) {
         self.imageView = [[UIImageView alloc] initWithImage:self.currentPicture];
+        self.currentBlurredPicture = [UIImage imageNamed:@"backgroundBlurred"];
         [self addSubview: self.imageView];
         self.delegate = self;
         self.contentSize = self.imageView.image.size;
@@ -148,29 +149,29 @@ static bool transitionIsForward = YES;
 
 - (void)updateBackground
 {
-//    NSLog(@"uhu");
-//    self.contentSize = self.imageView.image.size;
-//    
-//    switch ([[UIDevice currentDevice] orientation]) {
-//        case UIDeviceOrientationPortrait:
-//            self.minimumZoomScale = self.bounds.size.height / self.imageView.frame.size.height;
-//            self.maximumZoomScale = self.minimumZoomScale;
-//            self.zoomScale = self.minimumZoomScale;
-//            break;
-//            
-//        case UIDeviceOrientationLandscapeLeft:
-//            
-//        case UIDeviceOrientationLandscapeRight:
-//            self.minimumZoomScale = self.bounds.size.width / self.imageView.bounds.size.width;
-//            self.maximumZoomScale = self.minimumZoomScale;
-//            self.zoomScale = self.minimumZoomScale;
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    self.contentOffset = CGPointZero;
+    NSLog(@"uhu");
+    self.contentSize = self.imageView.image.size;
+    
+    switch ([[UIDevice currentDevice] orientation]) {
+        case UIDeviceOrientationPortrait:
+            self.minimumZoomScale = self.bounds.size.height / self.imageView.frame.size.height;
+            self.maximumZoomScale = self.minimumZoomScale;
+            self.zoomScale = self.minimumZoomScale;
+            break;
+            
+        case UIDeviceOrientationLandscapeLeft:
+            
+        case UIDeviceOrientationLandscapeRight:
+            self.minimumZoomScale = self.bounds.size.width / self.imageView.bounds.size.width;
+            self.maximumZoomScale = self.minimumZoomScale;
+            self.zoomScale = self.minimumZoomScale;
+            break;
+            
+        default:
+            break;
+    }
+    
+    self.contentOffset = CGPointZero;
 }
 
 - (CGPoint)beginningOffset
@@ -194,7 +195,7 @@ static bool transitionIsForward = YES;
         NSArray *photoDictionariesArray = [response valueForKeyPath:@"photos.photo"];
         NSDictionary *randomPhotoDictionary = [photoDictionariesArray objectAtIndex:arc4random() % photoDictionariesArray.count];
         self.nextPicture = [[[[FLCImage alloc] initWithDescriptionDictionary:randomPhotoDictionary] largeSizedImage] exposure:-1];
-        self.nextBlurredPicture = [self.nextPicture blur:10];
+        self.nextBlurredPicture = [self.nextPicture blur:40];
     }];
 }
 

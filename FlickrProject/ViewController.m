@@ -41,7 +41,6 @@
 {
     if ([self orientationChanged]) {
         NSLog(@"promjenio");
-//        self.backgroundView.frame = self.view.frame;
         [self.backgroundView updateBackground];
     }
 }
@@ -292,8 +291,9 @@
     if (!_closeFormButton) {
         _closeFormButton = [UIButton new];
         _closeFormButton.alpha = 0;
-        [_closeFormButton setTitle:@"x" forState:UIControlStateNormal];
+        [_closeFormButton setTitle:@"X" forState:UIControlStateNormal];
         [_closeFormButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
+        _closeFormButton.tintColor = [UIColor blackColor];
         [_closeFormButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _closeFormButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_closeFormButton addTarget:self action:@selector(closeForm) forControlEvents:UIControlEventTouchUpInside];
