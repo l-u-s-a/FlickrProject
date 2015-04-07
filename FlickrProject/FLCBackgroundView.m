@@ -14,27 +14,46 @@
 
 @implementation FLCBackgroundView
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
+    
     if (self) {
         self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
         [self addSubview: self.imageView];
         self.delegate = self;
-        self.contentSize = self.imageView.bounds.size;
-        self.minimumZoomScale = self.frame.size.height / self.imageView.image.size.height;
-        self.maximumZoomScale = 2;
-//        self.zoomScale = 0.6;
-//        self.minimumZoomScale = self.bounds.size.height / self.imageView.bounds.size.height;
-//        self.maximumZoomScale = self.bounds.size.height / self.imageView.bounds.size.height;;
-        self.zoomScale = self.minimumZoomScale;
-//        self.contentOffset = CGPointMake(self.bounds.size.height/2, 0);
+        self.contentSize = self.imageView.frame.size;
     }
+    
     return self;
+
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.imageView;
 }
+
+- (void)updateBackground
+{
+    switch ([[UIDevice currentDevice] orientation]) {
+        case UIDeviceOrientationPortrait:
+            self.minimumZoomScale = self.bounds.size.height / self.imageView.bounds.size.height;
+            self.maximumZoomScale = self.minimumZoomScale;
+            self.zoomScale = self.minimumZoomScale;
+            break;
+            
+        case UIDeviceOrientationLandscapeLeft:
+            
+        case UIDeviceOrientationLandscapeRight:
+            self.minimumZoomScale = self.bounds.size.width / self.imageView.bounds.size.width;
+            self.maximumZoomScale = self.minimumZoomScale;
+            self.zoomScale = self.minimumZoomScale;
+            break;
+            
+        default:
+            break;
+    }
+}
+
 @end

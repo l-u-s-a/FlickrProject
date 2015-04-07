@@ -43,7 +43,7 @@ static float highlightedFactor = 1.2;
 - (UIColor *)highlightedColor
 {
     if (!_highlightedColor) {
-        const float* colors = CGColorGetComponents(self.originalColor.CGColor);
+        const CGFloat* colors = CGColorGetComponents(self.originalColor.CGColor);
         float red, green, blue;
         
         red = colors[0] * highlightedFactor;

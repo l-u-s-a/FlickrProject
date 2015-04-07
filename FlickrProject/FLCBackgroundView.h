@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FLCBackgroundView : UIScrollView <UIScrollViewDelegate>
-
+- (void)updateBackground;
 @end

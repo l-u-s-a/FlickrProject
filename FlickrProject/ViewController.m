@@ -12,8 +12,8 @@
 #import "FLCButton.h"
 
 @interface ViewController ()
-@property (nonatomic, strong)FLCBackgroundView *backgroundView;
-@property (nonatomic, strong)FLCLoginFormView *loginFormView;
+@property (nonatomic, strong) FLCBackgroundView *backgroundView;
+@property (nonatomic, strong) FLCLoginFormView *loginFormView;
 @property (strong, nonatomic) UIImageView *logoImageView;
 @property (strong, nonatomic) NSDictionary *viewsDictionary;
 @property (strong, nonatomic) NSDictionary *metrics;
@@ -30,6 +30,13 @@
     [self positionLogoInCenter];
     [self addConstraintsToLoginForm];
 }
+
+- (void)viewDidLayoutSubviews
+{
+    self.backgroundView.frame = self.view.frame;
+    [self.backgroundView updateBackground];
+}
+
 
 - (void)positionLogoInCenter
 {
@@ -174,6 +181,7 @@
                                                                         views:self.viewsDictionary]];
 }
 
+
 - (NSDictionary *)viewsDictionary
 {
     if (!_viewsDictionary) {
@@ -181,8 +189,7 @@
                              @"logo":self.logoImageView,
                              @"explore":self.exploreViewButton,
                              @"signIn":self.signInFormButton,
-                             @"X":self.closeFormButton,
-                             @"background":self.backgroundView};
+                             @"X":self.closeFormButton};
     }
     return _viewsDictionary;
 }
@@ -197,16 +204,6 @@
         [self addSizeConstraintsToLogo];
     }
     return _logoImageView;
-}
-
-- (FLCBackgroundView *)backgroundView
-{
-    if (!_backgroundView) {
-        _backgroundView = [FLCBackgroundView new];
-        _backgroundView.frame = self.view.bounds;
-        [self.view insertSubview:_backgroundView atIndex:0];
-    }
-    return _backgroundView;
 }
 
 - (NSDictionary *)metrics
@@ -331,6 +328,15 @@
     
     
     
+}
+
+- (FLCBackgroundView *)backgroundView
+{
+    if (!_backgroundView) {
+        _backgroundView = [[FLCBackgroundView alloc]initWithFrame:self.view.frame];
+        [self.view insertSubview:_backgroundView atIndex:0];
+    }
+    return _backgroundView;
 }
 
 @end

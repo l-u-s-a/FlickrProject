@@ -92,8 +92,6 @@
 		A19DEF1E1ACF432B0025E65D /* FlickrProject */ = {
 			isa = PBXGroup;
 			children = (
-				A19DEF231ACF432B0025E65D /* AppDelegate.h */,
-				A19DEF241ACF432B0025E65D /* AppDelegate.m */,
 				A19DEF291ACF432B0025E65D /* ViewController.h */,
 				A19DEF2A1ACF432B0025E65D /* ViewController.m */,
 				A19DEF481ACF4B580025E65D /* FLCBackgroundView.h */,
@@ -114,6 +112,8 @@
 		A19DEF1F1ACF432B0025E65D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A19DEF231ACF432B0025E65D /* AppDelegate.h */,
+				A19DEF241ACF432B0025E65D /* AppDelegate.m */,
 				A19DEF201ACF432B0025E65D /* Info.plist */,
 				A19DEF211ACF432B0025E65D /* main.m */,
 			);
