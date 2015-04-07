@@ -29,12 +29,14 @@
     [self setupConstraints];
     [self positionLogoInCenter];
     [self addConstraintsToLoginForm];
+    [self.backgroundView startTransition];
 }
 
 - (void)viewDidLayoutSubviews
 {
     self.backgroundView.frame = self.view.frame;
     [self.backgroundView updateBackground];
+//    [self.backgroundView.layer removeAllAnimations];
 }
 
 

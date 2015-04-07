@@ -10,4 +10,6 @@
 
 @interface FLCBackgroundView : UIScrollView <UIScrollViewDelegate>
 - (void)updateBackground;
+- (void)startTransition;
+- (void)stopTransition;
 @end
