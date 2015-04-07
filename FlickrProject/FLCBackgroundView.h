@@ -13,5 +13,6 @@
 @property (nonatomic, strong) UIImage *currentBlurredPicture;
 - (void)updateBackground;
 - (void)startTransition;
-- (void)blurBackground;
+- (void)stopBackground;
+- (void)resumeBackground;
 @end

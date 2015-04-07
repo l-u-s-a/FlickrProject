@@ -124,6 +124,7 @@
 
 - (void)prepareLoginForm
 {
+    [self.backgroundView stopBackground];
     [self positionLogoOnTop];
     [self.loginFormView setUsernameAsResponder];
     
@@ -131,7 +132,6 @@
                       duration:0.3
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        [self.backgroundView blurBackground];
                         [self.view layoutIfNeeded];
                         self.loginFormView.alpha = 1;
                         self.closeFormButton.alpha = 1;
@@ -164,6 +164,8 @@
                                               self.signInFormButton.alpha = 1;
                                           }];
                      }];
+    
+    [self.backgroundView resumeBackground];
 }
 
 - (void)clearForm

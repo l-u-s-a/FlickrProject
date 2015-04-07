@@ -43,15 +43,11 @@ static bool transitionIsForward = YES;
 - (void)setCurrentPicture:(UIImage *)currentPicture
 {
     _currentPicture = currentPicture;
-    self.imageView.image = currentPicture;
-    self.currentBlurredPicture = self.nextBlurredPicture;
-    self.nextBlurredPicture = nil;
 }
 
 - (void)setNextPicture:(UIImage *)nextPicture
 {
     _nextPicture = nextPicture;
-    self.nextBlurredPicture = [nextPicture blur:10];
 }
 
 - (instancetype)init
@@ -105,25 +101,25 @@ static bool transitionIsForward = YES;
                     }];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    NSLog(@"%f", scrollView.contentOffset.x);
-}
-
 - (void)changePicture
 {
-    if (!self.nextPicture) {
+    if (!self.nextPicture || !self.nextBlurredPicture) {
         transitionIsForward = (transitionIsForward) ? NO : YES;
         [self startTransition];
         return;
     }
     
+    self.currentPicture = self.nextPicture;
+    self.nextPicture = nil;
+    self.currentBlurredPicture = self.nextBlurredPicture;
+    self.nextBlurredPicture = nil;
+    
     [UIView transitionWithView:self.imageView
                       duration:0.4
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        self.currentPicture = self.nextPicture;
-                        self.nextPicture = nil;
+                        self.imageView.image = self.currentPicture;
+
                     } completion:^(BOOL finished) {
                         transitionIsForward = (transitionIsForward) ? NO : YES;
                         [self startTransition];
@@ -198,14 +194,34 @@ static bool transitionIsForward = YES;
         NSArray *photoDictionariesArray = [response valueForKeyPath:@"photos.photo"];
         NSDictionary *randomPhotoDictionary = [photoDictionariesArray objectAtIndex:arc4random() % photoDictionariesArray.count];
         self.nextPicture = [[[[FLCImage alloc] initWithDescriptionDictionary:randomPhotoDictionary] largeSizedImage] exposure:-1];
+        self.nextBlurredPicture = [self.nextPicture blur:10];
     }];
 }
 
-- (void)blurBackground
+- (void)stopBackground
 {
-    [self.layer removeAllAnimations];
-    self.currentPicture = self.currentBlurredPicture;
+    [UIView transitionWithView:self
+                      duration:0.3
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.layer removeAllAnimations];
+                        self.imageView.image = self.currentBlurredPicture;
+                    } completion:^(BOOL finished) {}];
+}
 
+- (void)resumeBackground
+{
+    [UIView transitionWithView:self
+                      duration:0.3
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        self.imageView.image = self.currentPicture;
+                    } completion:^(BOOL finished) {}];
+    
+    self.contentOffset = CGPointMake([self endingOffset].x/2, [self endingOffset].y/2);
+    
+    [self startTransition];
+    
 }
 
 @end
