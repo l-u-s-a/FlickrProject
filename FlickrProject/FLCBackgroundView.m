@@ -50,22 +50,6 @@ static bool transitionIsForward = YES;
     _nextPicture = nextPicture;
 }
 
-- (instancetype)init
-{
-    self = [super init];
-    
-    if (self) {
-        self.imageView = [[UIImageView alloc] initWithImage:self.currentPicture];
-        [self addSubview: self.imageView];
-        self.delegate = self;
-        self.contentSize = self.imageView.image.size;
-        self.minimumZoomScale = self.bounds.size.height / self.imageView.frame.size.height;
-        self.maximumZoomScale = self.minimumZoomScale;
-        self.zoomScale = self.minimumZoomScale;
-    }
-    return self;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -128,51 +112,38 @@ static bool transitionIsForward = YES;
 }
 
 
-//    [self loadNextPicture];
-//    self.contentOffset = CGPointZero;
-//    [UIView transitionWithView:self.imageView
-//                      duration:5
-//                       options:UIViewAnimationOptionCurveLinear
-//                    animations:^{
-//                        self.contentOffset = CGPointMake((self.imageView.bounds.size.width/self.zoomScale)- self.bounds.size.width/self.zoomScale, self.contentOffset.y);
-//                    } completion:^(BOOL finished) {
-//                        self.imageView.image = self.nextPicture;
-//                        [self updateBackground];
-//                        [self startTransition];
-//                    }];
-
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.imageView;
 }
 
 
-- (void)updateBackground
-{
-    NSLog(@"uhu");
-    self.contentSize = self.imageView.image.size;
-    
-    switch ([[UIDevice currentDevice] orientation]) {
-        case UIDeviceOrientationPortrait:
-            self.minimumZoomScale = self.bounds.size.height / self.imageView.frame.size.height;
-            self.maximumZoomScale = self.minimumZoomScale;
-            self.zoomScale = self.minimumZoomScale;
-            break;
-            
-        case UIDeviceOrientationLandscapeLeft:
-            
-        case UIDeviceOrientationLandscapeRight:
-            self.minimumZoomScale = self.bounds.size.width / self.imageView.bounds.size.width;
-            self.maximumZoomScale = self.minimumZoomScale;
-            self.zoomScale = self.minimumZoomScale;
-            break;
-            
-        default:
-            break;
-    }
-    
-    self.contentOffset = CGPointZero;
-}
+//- (void)updateBackground
+//{
+//    NSLog(@"uhu");
+//    self.contentSize = self.imageView.image.size;
+//    
+//    switch ([[UIDevice currentDevice] orientation]) {
+//        case UIDeviceOrientationPortrait:
+//            self.minimumZoomScale = self.bounds.size.height / self.imageView.frame.size.height;
+//            self.maximumZoomScale = self.minimumZoomScale;
+//            self.zoomScale = self.minimumZoomScale;
+//            break;
+//            
+//        case UIDeviceOrientationLandscapeLeft:
+//            
+//        case UIDeviceOrientationLandscapeRight:
+//            self.minimumZoomScale = self.bounds.size.width / self.imageView.bounds.size.width;
+//            self.maximumZoomScale = self.minimumZoomScale;
+//            self.zoomScale = self.minimumZoomScale;
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//    
+//    self.contentOffset = CGPointZero;
+//}
 
 - (CGPoint)beginningOffset
 {
@@ -195,7 +166,7 @@ static bool transitionIsForward = YES;
         NSArray *photoDictionariesArray = [response valueForKeyPath:@"photos.photo"];
         NSDictionary *randomPhotoDictionary = [photoDictionariesArray objectAtIndex:arc4random() % photoDictionariesArray.count];
         self.nextPicture = [[[[FLCImage alloc] initWithDescriptionDictionary:randomPhotoDictionary] largeSizedImage] exposure:-1];
-        self.nextBlurredPicture = [self.nextPicture blur:40];
+        self.nextBlurredPicture = [self.nextPicture blur:20];
     }];
 }
 

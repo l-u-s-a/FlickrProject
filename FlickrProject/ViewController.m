@@ -37,21 +37,6 @@
     self.currentOrientation =[[UIDevice currentDevice] orientation];
 }
 
-- (void)viewDidLayoutSubviews
-{
-    if ([self orientationChanged]) {
-        NSLog(@"promjenio");
-        [self.backgroundView updateBackground];
-    }
-}
-
-- (BOOL)orientationChanged
-{
-    if ([[UIDevice currentDevice] orientation] != self.currentOrientation) {
-        self.currentOrientation = [[UIDevice currentDevice] orientation];
-        return YES;
-    } else return NO;
-}
 
 - (void)positionLogoInCenter
 {
@@ -138,11 +123,13 @@
                         self.exploreViewButton.alpha = 0;
                         self.signInFormButton.alpha = 0;
                         [self.backgroundView.layer removeAllAnimations];
+                        self.backgroundView.scrollEnabled = NO;
                     }];
 }
 
 - (void)closeForm
 {
+    self.backgroundView.scrollEnabled = YES;
     [self clearForm];
     [self.loginFormView setWindowAsResponder];
     [self resetAllConstraints];
