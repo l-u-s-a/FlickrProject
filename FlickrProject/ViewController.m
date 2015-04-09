@@ -223,7 +223,7 @@
         
         float logoOffset = self.view.bounds.size.height/16;
         
-        float bottomBtnSizeV = self.view.bounds.size.height/16;
+        float bottomBtnSizeV = self.view.bounds.size.height/14;
         
         float formSizeV = 3 * bottomBtnSizeV + 20;
         

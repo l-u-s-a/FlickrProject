@@ -89,6 +89,7 @@ static bool transitionIsForward = YES;
 - (void)changePicture
 {
     if (!self.nextPicture || !self.nextBlurredPicture) {
+        NSLog(@"ovdje");
         transitionIsForward = (transitionIsForward) ? NO : YES;
         [self startTransition];
         return;
@@ -147,12 +148,12 @@ static bool transitionIsForward = YES;
 
 - (CGPoint)beginningOffset
 {
-    return CGPointMake(0, 0);
+    return CGPointMake(self.contentSize.width/10, 0);
 }
 
 - (CGPoint)endingOffset
 {
-    return CGPointMake(self.contentSize.width - self.frame.size.width, 0);
+    return CGPointMake(0.9*self.contentSize.width - self.frame.size.width, 0);
 }
 
 - (void)loadNextPicture
@@ -166,7 +167,7 @@ static bool transitionIsForward = YES;
         NSArray *photoDictionariesArray = [response valueForKeyPath:@"photos.photo"];
         NSDictionary *randomPhotoDictionary = [photoDictionariesArray objectAtIndex:arc4random() % photoDictionariesArray.count];
         self.nextPicture = [[[[FLCImage alloc] initWithDescriptionDictionary:randomPhotoDictionary] largeSizedImage] exposure:-1];
-        self.nextBlurredPicture = [self.nextPicture blur:20];
+        self.nextBlurredPicture = [self.nextPicture blur:5];
     }];
 }
 
