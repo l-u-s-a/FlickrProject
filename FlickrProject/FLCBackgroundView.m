@@ -20,6 +20,7 @@
 @implementation FLCBackgroundView
 
 static bool transitionIsForward = YES;
+static int transitionTime = 30;
 
 
 - (UIImageView *)imageView
@@ -60,22 +61,24 @@ static bool transitionIsForward = YES;
         [self addSubview: self.imageView];
         self.delegate = self;
         self.contentSize = self.imageView.image.size;
-        self.minimumZoomScale = self.frame.size.height / self.contentSize.height;
-        self.maximumZoomScale = self.minimumZoomScale;
-        self.zoomScale = self.minimumZoomScale;
+        [self zoomToFill];
         self.frame = frame;
     }
     return self;
 }
 
-
-
 - (void)startTransition
+{
+    [self startTransitionWithDuration:transitionTime];
+}
+
+
+- (void)startTransitionWithDuration:(NSTimeInterval)interval
 {
     if (!self.nextPicture) [self loadNextPicture];
     
     [UIView transitionWithView:self
-                      duration:20
+                      duration:interval
                        options:UIViewAnimationOptionCurveLinear
                     animations:^{
                         self.contentOffset = (transitionIsForward) ? [self endingOffset] : [self beginningOffset];
@@ -84,6 +87,13 @@ static bool transitionIsForward = YES;
                             [self changePicture];
                         }
                     }];
+}
+
+- (void)zoomToFill
+{
+    self.minimumZoomScale = self.frame.size.height / self.contentSize.height;
+    self.maximumZoomScale = self.minimumZoomScale;
+    self.zoomScale = self.minimumZoomScale;
 }
 
 - (void)changePicture
@@ -167,7 +177,7 @@ static bool transitionIsForward = YES;
         NSArray *photoDictionariesArray = [response valueForKeyPath:@"photos.photo"];
         NSDictionary *randomPhotoDictionary = [photoDictionariesArray objectAtIndex:arc4random() % photoDictionariesArray.count];
         self.nextPicture = [[[[FLCImage alloc] initWithDescriptionDictionary:randomPhotoDictionary] largeSizedImage] exposure:-1];
-        self.nextBlurredPicture = [self.nextPicture blur:5];
+        self.nextBlurredPicture = [self.nextPicture blur:1];
     }];
 }
 
@@ -179,7 +189,9 @@ static bool transitionIsForward = YES;
                     animations:^{
                         [self.layer removeAllAnimations];
                         self.imageView.image = self.currentBlurredPicture;
-                    } completion:^(BOOL finished) {}];
+                    } completion:^(BOOL finished) {
+                        self.contentOffset = CGPointMake([self endingOffset].x/2, [self endingOffset].y/2);
+                    }];
 }
 
 - (void)resumeBackground
@@ -191,9 +203,8 @@ static bool transitionIsForward = YES;
                         self.imageView.image = self.currentPicture;
                     } completion:^(BOOL finished) {}];
     
-    self.contentOffset = CGPointMake([self endingOffset].x/2, [self endingOffset].y/2);
     
-    [self startTransition];
+    [self startTransitionWithDuration:transitionTime/2];
     
 }
 
