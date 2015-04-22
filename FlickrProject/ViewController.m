@@ -10,6 +10,7 @@
 #import "FLCBackgroundView.h"
 #import "FLCLoginFormView.h"
 #import "FLCButton.h"
+#import "FLCExploreViewController.h"
 #import "ImageFilter.h"
 
 @interface ViewController ()
@@ -256,9 +257,15 @@
         _exploreViewButton = [FLCButton new];
         _exploreViewButton.backgroundColor = [UIColor colorWithRed:95/255.0 green:95/255.0 blue:95/255.0 alpha:1];
         [_exploreViewButton setTitle:@"Explore" forState:UIControlStateNormal];
+        [_exploreViewButton addTarget:self action:@selector(moveToExploreView) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_exploreViewButton];
     }
     return _exploreViewButton;
+}
+
+- (void)moveToExploreView
+{
+    [self performSegueWithIdentifier:@"exploreViewSegue" sender:self];
 }
 
 - (FLCButton *)signInFormButton

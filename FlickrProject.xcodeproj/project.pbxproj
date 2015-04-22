@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30E4455631FF50766930C901 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8FB15A6D319FB1B7F35064 /* libPods.a */; };
+		A1258CA51AE7C20F00CCEE1B /* FLCExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1258CA41AE7C20F00CCEE1B /* FLCExploreViewController.m */; };
 		A1667EC51AD3D1A200C2C155 /* FLCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A1667EC41AD3D1A200C2C155 /* FLCImage.m */; };
 		A19DEF221ACF432B0025E65D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF211ACF432B0025E65D /* main.m */; };
 		A19DEF251ACF432B0025E65D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF241ACF432B0025E65D /* AppDelegate.m */; };
@@ -20,6 +21,7 @@
 		A19DEF4A1ACF4B580025E65D /* FLCBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF491ACF4B580025E65D /* FLCBackgroundView.m */; };
 		A19DEF501AD162570025E65D /* FLCLoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */; };
 		A19DEF531AD187930025E65D /* FLCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF521AD187930025E65D /* FLCButton.m */; };
+		A1F8E9241AE7CFA6001AF7F4 /* FLCSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F8E9231AE7CFA6001AF7F4 /* FLCSearchBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,8 @@
 /* Begin PBXFileReference section */
 		4C22A06544A1D6D9037D100E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7E8FB15A6D319FB1B7F35064 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1258CA31AE7C20F00CCEE1B /* FLCExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCExploreViewController.h; sourceTree = "<group>"; };
+		A1258CA41AE7C20F00CCEE1B /* FLCExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCExploreViewController.m; sourceTree = "<group>"; };
 		A1667EC31AD3D1A200C2C155 /* FLCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLCImage.h; path = ../FLCImage.h; sourceTree = "<group>"; };
 		A1667EC41AD3D1A200C2C155 /* FLCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLCImage.m; path = ../FLCImage.m; sourceTree = "<group>"; };
 		A19DEF1C1ACF432B0025E65D /* FlickrProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +61,8 @@
 		A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCLoginFormView.m; sourceTree = "<group>"; };
 		A19DEF511AD187930025E65D /* FLCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCButton.h; sourceTree = "<group>"; };
 		A19DEF521AD187930025E65D /* FLCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCButton.m; sourceTree = "<group>"; };
+		A1F8E9221AE7CFA6001AF7F4 /* FLCSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCSearchBar.h; sourceTree = "<group>"; };
+		A1F8E9231AE7CFA6001AF7F4 /* FLCSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCSearchBar.m; sourceTree = "<group>"; };
 		BD2BE0E6E4513BE580965C7D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,10 +132,14 @@
 				A19DEF481ACF4B580025E65D /* FLCBackgroundView.h */,
 				A19DEF491ACF4B580025E65D /* FLCBackgroundView.m */,
 				A19DEF2C1ACF432B0025E65D /* Main.storyboard */,
+				A1F8E9221AE7CFA6001AF7F4 /* FLCSearchBar.h */,
+				A1F8E9231AE7CFA6001AF7F4 /* FLCSearchBar.m */,
+				A1258CA31AE7C20F00CCEE1B /* FLCExploreViewController.h */,
+				A1258CA41AE7C20F00CCEE1B /* FLCExploreViewController.m */,
 				A19DEF4E1AD162570025E65D /* FLCLoginFormView.h */,
+				A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */,
 				A19DEF511AD187930025E65D /* FLCButton.h */,
 				A19DEF521AD187930025E65D /* FLCButton.m */,
-				A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */,
 				A19DEF2F1ACF432B0025E65D /* Images.xcassets */,
 				A19DEF311ACF432B0025E65D /* LaunchScreen.xib */,
 				A19DEF261ACF432B0025E65D /* FlickrProject.xcdatamodeld */,
@@ -306,8 +316,10 @@
 				A19DEF531AD187930025E65D /* FLCButton.m in Sources */,
 				A19DEF281ACF432B0025E65D /* FlickrProject.xcdatamodeld in Sources */,
 				A19DEF251ACF432B0025E65D /* AppDelegate.m in Sources */,
+				A1F8E9241AE7CFA6001AF7F4 /* FLCSearchBar.m in Sources */,
 				A19DEF2B1ACF432B0025E65D /* ViewController.m in Sources */,
 				A19DEF501AD162570025E65D /* FLCLoginFormView.m in Sources */,
+				A1258CA51AE7C20F00CCEE1B /* FLCExploreViewController.m in Sources */,
 				A1667EC51AD3D1A200C2C155 /* FLCImage.m in Sources */,
 				A19DEF221ACF432B0025E65D /* main.m in Sources */,
 				A19DEF4A1ACF4B580025E65D /* FLCBackgroundView.m in Sources */,
@@ -434,6 +446,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlickrProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -445,6 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlickrProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

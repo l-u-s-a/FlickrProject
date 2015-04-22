@@ -177,7 +177,7 @@ static int transitionTime = 30;
         NSArray *photoDictionariesArray = [response valueForKeyPath:@"photos.photo"];
         NSDictionary *randomPhotoDictionary = [photoDictionariesArray objectAtIndex:arc4random() % photoDictionariesArray.count];
         self.nextPicture = [[[[FLCImage alloc] initWithDescriptionDictionary:randomPhotoDictionary] largeSizedImage] exposure:-1];
-        self.nextBlurredPicture = [self.nextPicture blur:1];
+        self.nextBlurredPicture = [self.nextPicture blur:10];
     }];
 }
 
@@ -189,8 +189,8 @@ static int transitionTime = 30;
                     animations:^{
                         [self.layer removeAllAnimations];
                         self.imageView.image = self.currentBlurredPicture;
-                    } completion:^(BOOL finished) {
                         self.contentOffset = CGPointMake([self endingOffset].x/2, [self endingOffset].y/2);
+                    } completion:^(BOOL finished) {
                     }];
 }
 
