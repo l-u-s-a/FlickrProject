@@ -11,6 +11,7 @@
 
 @interface FLCImage : NSObject
 @property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) UIImage *smallSquareSizedImage;
 @property (strong, nonatomic) UIImage *smallSizedImage;
 @property (strong, nonatomic) UIImage *mediumSizedImage;
 @property (strong, nonatomic) UIImage *largeSizedImage;

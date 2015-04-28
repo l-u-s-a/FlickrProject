@@ -27,10 +27,16 @@
     return self;
 }
 
+-(UIImage *)smallSquareSizedImage
+{
+    return [self imageWithSize:FKPhotoSizeSmallSquare75];
+}
+
 -(UIImage *)smallSizedImage
 {
-    return [self imageWithSize:FKPhotoSizeSmall320];
+    return [self imageWithSize:FKPhotoSizeSmall240];
 }
+
 
 -(UIImage *)mediumSizedImage
 {

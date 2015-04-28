@@ -10,6 +10,8 @@
 
 
 
-@interface FLCExploreViewController : UIViewController <UISearchBarDelegate>
+@interface FLCExploreViewController : UIViewController <UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (nonatomic, strong) NSArray *photos;
 @end
 
