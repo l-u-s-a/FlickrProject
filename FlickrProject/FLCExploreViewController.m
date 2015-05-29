@@ -52,7 +52,6 @@
         NSArray *photos = [response valueForKeyPath:@"photos.photo"];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.photos = photos;
-            [self.collectionView reloadData];
         });
     }];
 }

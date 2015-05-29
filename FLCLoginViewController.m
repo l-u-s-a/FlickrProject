@@ -10,7 +10,12 @@
 
 @interface FLCLoginViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) UITextField *usernameTextField;
+@property (strong, nonatomic) UITextField *passwordTextField;
+@property (assign) BOOL *loginEnabled;
 @property (strong, nonatomic) NSArray *tableCells;
+@property (strong, nonatomic) NSMutableArray *textFields;
 @property (strong, nonatomic) IBOutlet UIButton *signUpButton;
 @end
 
@@ -18,19 +23,55 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    [self setup];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setup
+{
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.usernameTextField.delegate = self;
+    self.passwordTextField.delegate = self;
+    [self.loginButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateDisabled];
+    [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self addConstraintsToTableView];
+}
+
+- (void)addConstraintsToTableView
+{
+    NSNumber *tableSize = [NSNumber numberWithFloat:self.tableView.rowHeight];
+    NSDictionary *viewsDictionary = @{@"table" : self.tableView};
+    NSDictionary *metrics = @{@"tableSize" : tableSize};
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[table(tableSize)]"
+                                                                      options:NSLayoutFormatAlignAllCenterX
+                                                                      metrics:metrics
+                                                                        views:viewsDictionary]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
+}
+
+- (IBAction)loginButtonPressed:(UIButton *)sender {
+    [self login];
+}
+
+- (void)login
+{
+    
+    [self setFocusOnView];
+
+    NSString *nextTitle = ([self.loginButton.titleLabel.text isEqualToString:@"Login"]) ? @"Cancel" : @"Login";
+    [self.loginButton setTitle:nextTitle forState:UIControlStateNormal];
+    
+}
+
+- (void)setFocusOnView
+{
+    [self.usernameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -40,7 +81,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"FLCLoginTableViewCell";
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     NSLog(@"%@", indexPath);
@@ -63,17 +104,20 @@
         switch (indexPath.row) {
             case 0:     //username
                 textField.returnKeyType = UIReturnKeyNext;
+                self.usernameTextField = textField;
                 break;
                 
             case 1:     //password
                 textField.returnKeyType = UIReturnKeyGo;
                 textField.secureTextEntry = YES;
+                self.passwordTextField = textField;
                 break;
                 
             default:
                 break;
         }
         [cell addSubview:textField];
+        [self.textFields addObject:textField];
     }
     return cell;
 }
@@ -86,21 +130,38 @@
     return _tableCells;
 }
 
-- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"dada");
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSInteger tag = textField.tag + 1;
     if (tag == self.tableCells.count) {
-        [textField resignFirstResponder];
-        NSLog(@"LOGIN");
+        [self login];
     } else {
         UITextField *nextField = (UITextField *)[self.tableView viewWithTag:tag];
         [nextField becomeFirstResponder];
     }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *username = self.usernameTextField.text;
+    NSString *password = self.passwordTextField.text;
+    
+    BOOL loginEnabled = NO;
+    
+    if (string.length == 0) {
+        NSLog(@"%d", range.location);
+        if (textField == self.usernameTextField) {
+            loginEnabled = (username.length > 1 && password.length > 0);
+        } else {
+            loginEnabled = NO;
+        }
+    } else {
+        loginEnabled = (textField == self.usernameTextField) ? (password.length > 0) : (username.length > 0);
+    }
+    
+    self.loginButton.enabled = loginEnabled;
+    
     return YES;
 }
 

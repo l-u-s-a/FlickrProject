@@ -13,7 +13,7 @@
 		A19DEF221ACF432B0025E65D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF211ACF432B0025E65D /* main.m */; };
 		A19DEF251ACF432B0025E65D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF241ACF432B0025E65D /* AppDelegate.m */; };
 		A19DEF281ACF432B0025E65D /* FlickrProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF261ACF432B0025E65D /* FlickrProject.xcdatamodeld */; };
-		A19DEF2B1ACF432B0025E65D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF2A1ACF432B0025E65D /* ViewController.m */; };
+		A19DEF2B1ACF432B0025E65D /* FLCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF2A1ACF432B0025E65D /* FLCViewController.m */; };
 		A19DEF2E1ACF432B0025E65D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A19DEF2C1ACF432B0025E65D /* Main.storyboard */; };
 		A19DEF331ACF432B0025E65D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19DEF311ACF432B0025E65D /* LaunchScreen.xib */; };
 		A19DEF3F1ACF432B0025E65D /* FlickrProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A19DEF3E1ACF432B0025E65D /* FlickrProjectTests.m */; };
@@ -48,8 +48,8 @@
 		A19DEF231ACF432B0025E65D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A19DEF241ACF432B0025E65D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A19DEF271ACF432B0025E65D /* FlickrProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlickrProject.xcdatamodel; sourceTree = "<group>"; };
-		A19DEF291ACF432B0025E65D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A19DEF2A1ACF432B0025E65D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A19DEF291ACF432B0025E65D /* FLCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLCViewController.h; sourceTree = "<group>"; };
+		A19DEF2A1ACF432B0025E65D /* FLCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLCViewController.m; sourceTree = "<group>"; };
 		A19DEF2D1ACF432B0025E65D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A19DEF321ACF432B0025E65D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A19DEF381ACF432B0025E65D /* FlickrProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +105,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A16891161AFCECC000D5B163 /* CustomComponents */ = {
+			isa = PBXGroup;
+			children = (
+				A1D31BBC1AEE851600BEE324 /* FLCCollectionViewCell.h */,
+				A1D31BBD1AEE851600BEE324 /* FLCCollectionViewCell.m */,
+				A1667EC31AD3D1A200C2C155 /* FLCImage.h */,
+				A1667EC41AD3D1A200C2C155 /* FLCImage.m */,
+				A19DEF511AD187930025E65D /* FLCButton.h */,
+				A19DEF521AD187930025E65D /* FLCButton.m */,
+			);
+			name = CustomComponents;
+			sourceTree = "<group>";
+		};
 		A19DEF131ACF432B0025E65D = {
 			isa = PBXGroup;
 			children = (
@@ -129,23 +142,18 @@
 		A19DEF1E1ACF432B0025E65D /* FlickrProject */ = {
 			isa = PBXGroup;
 			children = (
+				A19DEF291ACF432B0025E65D /* FLCViewController.h */,
+				A19DEF2A1ACF432B0025E65D /* FLCViewController.m */,
+				A1258CA31AE7C20F00CCEE1B /* FLCExploreViewController.h */,
+				A1258CA41AE7C20F00CCEE1B /* FLCExploreViewController.m */,
 				A1D31BC31AEFCAB000BEE324 /* FLCLoginViewController.h */,
 				A1D31BC41AEFCAB000BEE324 /* FLCLoginViewController.m */,
-				A1667EC31AD3D1A200C2C155 /* FLCImage.h */,
-				A1667EC41AD3D1A200C2C155 /* FLCImage.m */,
-				A19DEF291ACF432B0025E65D /* ViewController.h */,
-				A19DEF2A1ACF432B0025E65D /* ViewController.m */,
+				A19DEF4E1AD162570025E65D /* FLCLoginFormView.h */,
+				A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */,
 				A19DEF481ACF4B580025E65D /* FLCBackgroundView.h */,
 				A19DEF491ACF4B580025E65D /* FLCBackgroundView.m */,
 				A19DEF2C1ACF432B0025E65D /* Main.storyboard */,
-				A1D31BBC1AEE851600BEE324 /* FLCCollectionViewCell.h */,
-				A1D31BBD1AEE851600BEE324 /* FLCCollectionViewCell.m */,
-				A1258CA31AE7C20F00CCEE1B /* FLCExploreViewController.h */,
-				A1258CA41AE7C20F00CCEE1B /* FLCExploreViewController.m */,
-				A19DEF4E1AD162570025E65D /* FLCLoginFormView.h */,
-				A19DEF4F1AD162570025E65D /* FLCLoginFormView.m */,
-				A19DEF511AD187930025E65D /* FLCButton.h */,
-				A19DEF521AD187930025E65D /* FLCButton.m */,
+				A16891161AFCECC000D5B163 /* CustomComponents */,
 				A19DEF311ACF432B0025E65D /* LaunchScreen.xib */,
 				A19DEF261ACF432B0025E65D /* FlickrProject.xcdatamodeld */,
 				A19DEF1F1ACF432B0025E65D /* Supporting Files */,
@@ -321,7 +329,7 @@
 				A19DEF531AD187930025E65D /* FLCButton.m in Sources */,
 				A19DEF281ACF432B0025E65D /* FlickrProject.xcdatamodeld in Sources */,
 				A19DEF251ACF432B0025E65D /* AppDelegate.m in Sources */,
-				A19DEF2B1ACF432B0025E65D /* ViewController.m in Sources */,
+				A19DEF2B1ACF432B0025E65D /* FLCViewController.m in Sources */,
 				A19DEF501AD162570025E65D /* FLCLoginFormView.m in Sources */,
 				A1D31BC51AEFCAB000BEE324 /* FLCLoginViewController.m in Sources */,
 				A1258CA51AE7C20F00CCEE1B /* FLCExploreViewController.m in Sources */,

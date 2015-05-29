@@ -6,38 +6,33 @@
 //  Copyright (c) 2015 Luka Usalj. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "FLCViewController.h"
 #import "FLCBackgroundView.h"
 #import "FLCLoginFormView.h"
 #import "FLCButton.h"
 #import "FLCExploreViewController.h"
 #import "ImageFilter.h"
 
-@interface ViewController ()
-@property (nonatomic, strong) FLCBackgroundView *backgroundView;
-@property (nonatomic, strong) FLCLoginFormView *loginFormView;
+@interface FLCViewController ()
+@property (strong, nonatomic) FLCBackgroundView *backgroundView;
+@property (strong, nonatomic) FLCLoginFormView *loginFormView;
 @property (strong, nonatomic) UIImageView *logoImageView;
 @property (strong, nonatomic) NSDictionary *viewsDictionary;
 @property (strong, nonatomic) NSDictionary *metrics;
 @property (strong, nonatomic) FLCButton *exploreViewButton;
 @property (strong, nonatomic) FLCButton *signInFormButton;
 @property (strong, nonatomic) UIButton *closeFormButton;
-@property (assign, nonatomic) UIDeviceOrientation currentOrientation;
-@property (assign, nonatomic) BOOL orientationChanged;
 @end
 
-@implementation ViewController
+@implementation FLCViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.currentOrientation = [[UIDevice currentDevice] orientation];
     [self setupConstraints];
     [self positionLogoInCenter];
     [self addConstraintsToLoginForm];
     [self.backgroundView startTransition];
-    self.currentOrientation =[[UIDevice currentDevice] orientation];
 }
-
 
 - (void)positionLogoInCenter
 {
@@ -90,8 +85,6 @@
     
 }
 
-
-
 - (void)addSizeConstraintsToLogo
 {
     [self.logoImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[logo(width)]"
@@ -104,8 +97,6 @@
                                                               metrics:self.metrics
                                                                 views:self.viewsDictionary]];
 }
-
-
 
 - (void)prepareLoginForm
 {
@@ -189,7 +180,6 @@
                                                                         views:self.viewsDictionary]];
 }
 
-
 - (NSDictionary *)viewsDictionary
 {
     if (!_viewsDictionary) {
@@ -238,7 +228,6 @@
     }
     return _metrics;
 }
-
 
 - (FLCLoginFormView *)loginFormView
 {
@@ -295,7 +284,6 @@
     }
     return _closeFormButton;
 }
-
 
 - (void)addConstraintsToLoginForm
 {

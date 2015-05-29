@@ -87,8 +87,6 @@
     return _loginButton;
 }
 
-
-
 - (void)performLogin
 {
     [self setWindowAsResponder];
@@ -161,9 +159,7 @@
                                                       constant:0]];
 }
 
-
 - (NSString *)username
-
 {
     return self.usernameTextField.text;
 }
@@ -183,8 +179,6 @@
     self.passwordTextField.text = password;
 }
 
-
-
 - (NSString *)buttonTitle
 {
     return self.loginButton.titleLabel.text;
@@ -194,6 +188,5 @@
 {
     [self.loginButton setTitle:buttonTitle forState:UIControlStateNormal];
 }
-
 
 @end

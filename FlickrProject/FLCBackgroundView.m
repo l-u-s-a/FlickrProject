@@ -22,7 +22,6 @@
 static bool transitionIsForward = YES;
 static int transitionTime = 30;
 
-
 - (UIImageView *)imageView
 {
     if (!_imageView) {
@@ -71,7 +70,6 @@ static int transitionTime = 30;
 {
     [self startTransitionWithDuration:transitionTime];
 }
-
 
 - (void)startTransitionWithDuration:(NSTimeInterval)interval
 {
@@ -122,39 +120,10 @@ static int transitionTime = 30;
                     }];
 }
 
-
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.imageView;
 }
-
-
-//- (void)updateBackground
-//{
-//    NSLog(@"uhu");
-//    self.contentSize = self.imageView.image.size;
-//    
-//    switch ([[UIDevice currentDevice] orientation]) {
-//        case UIDeviceOrientationPortrait:
-//            self.minimumZoomScale = self.bounds.size.height / self.imageView.frame.size.height;
-//            self.maximumZoomScale = self.minimumZoomScale;
-//            self.zoomScale = self.minimumZoomScale;
-//            break;
-//            
-//        case UIDeviceOrientationLandscapeLeft:
-//            
-//        case UIDeviceOrientationLandscapeRight:
-//            self.minimumZoomScale = self.bounds.size.width / self.imageView.bounds.size.width;
-//            self.maximumZoomScale = self.minimumZoomScale;
-//            self.zoomScale = self.minimumZoomScale;
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    self.contentOffset = CGPointZero;
-//}
 
 - (CGPoint)beginningOffset
 {

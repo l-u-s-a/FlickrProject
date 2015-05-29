@@ -11,7 +11,6 @@
 @interface FLCBackgroundView : UIScrollView <UIScrollViewDelegate>
 @property (nonatomic, strong) UIImage *currentPicture;
 @property (nonatomic, strong) UIImage *currentBlurredPicture;
-- (void)updateBackground;
 - (void)startTransition;
 - (void)stopBackground;
 - (void)resumeBackground;
